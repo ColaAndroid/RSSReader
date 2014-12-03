@@ -16,15 +16,24 @@
  */
 package me.robertoestrada.rssreader;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 
 import me.robertoestrada.rssreader.dummy.DummyContent;
+import nl.matshofman.saxrssreader.RssItem;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -34,15 +43,32 @@ import me.robertoestrada.rssreader.dummy.DummyContent;
  */
 public class ItemDetailFragment extends Fragment {
     /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
+     * The fragment argument representing the item title that this fragment
+     * receives
      */
-    public static final String ARG_ITEM_ID = "item_id";
-
+    public static final String ARG_ITEM_TITLE = "item_title";
     /**
-     * The dummy content this fragment is presenting.
+     * The fragment argument representing the item content that this fragment
+     * receives
      */
-    private DummyContent.DummyItem mItem;
+    public static final String ARG_ITEM_CONTENT = "item_content";
+    /**
+     * The fragment argument representing the item content that this fragment
+     * receives
+     */
+    public static final String ARG_ITEM_LINK = "item_link";
+    /**
+     * The item title
+     */
+    private String mItemTitle;
+    /**
+     * The item content
+     */
+    private String mItemContent;
+    /**
+     * The item link
+     */
+    private String mItemLink;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,11 +81,15 @@ public class ItemDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+        if (getArguments().containsKey(ARG_ITEM_TITLE)) {
+            mItemTitle = getArguments().getString(ARG_ITEM_TITLE);
+        }
+        if (getArguments().containsKey(ARG_ITEM_CONTENT)) {
+            mItemContent = getArguments().getString(ARG_ITEM_CONTENT);
+        }
+        if (getArguments().containsKey(ARG_ITEM_LINK)) {
+            mItemLink = getArguments().getString(ARG_ITEM_LINK);
+            setHasOptionsMenu(true);
         }
     }
 
@@ -68,11 +98,35 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(mItemTitle);
+
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+        if (mItemContent != null) {
+            WebView webView = (WebView) rootView.findViewById(R.id.item_detail);
+            webView.loadDataWithBaseURL("", mItemContent, "text/html", "UTF-8", "");
+            webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.details_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_showInBrowser:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(mItemLink));
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

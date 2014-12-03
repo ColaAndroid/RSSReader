@@ -19,6 +19,10 @@ package me.robertoestrada.rssreader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+
+import nl.matshofman.saxrssreader.RssItem;
 
 /**
  * An activity representing a list of Items. This activity
@@ -36,7 +40,7 @@ import android.support.v4.app.FragmentActivity;
  * {@link ItemListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class ItemListActivity extends FragmentActivity
+public class ItemListActivity extends ActionBarActivity
         implements ItemListFragment.Callbacks {
 
     /**
@@ -49,6 +53,13 @@ public class ItemListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+        // Set Material Design toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle(R.string.app_name);
+            setSupportActionBar(toolbar);
+        }
 
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
@@ -63,8 +74,6 @@ public class ItemListActivity extends FragmentActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**
@@ -72,13 +81,15 @@ public class ItemListActivity extends FragmentActivity
      * indicating that the item with the given ID was selected.
      */
     @Override
-    public void onItemSelected(String id) {
+    public void onItemSelected(String title, String content, String link) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID, id);
+            arguments.putString(ItemDetailFragment.ARG_ITEM_TITLE, title);
+            arguments.putString(ItemDetailFragment.ARG_ITEM_CONTENT, content);
+            arguments.putString(ItemDetailFragment.ARG_ITEM_LINK, link);
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -89,7 +100,9 @@ public class ItemListActivity extends FragmentActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_TITLE, title);
+            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_CONTENT, content);
+            detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_LINK, link);
             startActivity(detailIntent);
         }
     }

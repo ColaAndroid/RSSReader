@@ -77,7 +77,7 @@ public class ItemListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onItemSelected(String title, String content, String link);
     }
 
     /**
@@ -86,7 +86,7 @@ public class ItemListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(String title, String content, String link) {
         }
     };
 
@@ -146,7 +146,8 @@ public class ItemListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        RssItem item = mFeedItemList.get(position);
+        mCallbacks.onItemSelected(item.getTitle(), item.getDescription(), item.getLink());
     }
 
     @Override
