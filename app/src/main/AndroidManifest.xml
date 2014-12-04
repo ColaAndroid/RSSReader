@@ -26,6 +26,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemListActivity" />
         </activity>
+        <activity
+            android:name="me.robertoestrada.rssreader.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="me.robertoestrada.rssreader.ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.robertoestrada.rssreader.ItemListActivity" />
+        </activity>
     </application>
 
 </manifest>

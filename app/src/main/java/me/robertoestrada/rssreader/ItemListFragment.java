@@ -17,7 +17,9 @@
 package me.robertoestrada.rssreader;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +35,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import me.robertoestrada.rssreader.adapters.RSSItemAdapter;
-import me.robertoestrada.rssreader.dummy.DummyContent;
 import nl.matshofman.saxrssreader.RssItem;
 import nl.matshofman.saxrssreader.RssReader;
 
@@ -49,7 +50,6 @@ import nl.matshofman.saxrssreader.RssReader;
 public class ItemListFragment extends ListFragment {
 
     private static final String TAG = ItemListFragment.class.getName();
-    private static final String feedURL = "http://www.xatakandroid.com/tag/feeds/rss2.xml";
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -67,6 +67,11 @@ public class ItemListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    /**
+     * The feed URL, this loads from the preferences
+     */
+    private String mFeedURL;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -103,9 +108,7 @@ public class ItemListFragment extends ListFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -117,7 +120,10 @@ public class ItemListFragment extends ListFragment {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
 
-        getFeedItemsAsync(feedURL);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mFeedURL = sp.getString("feed_url", getResources().getString(R.string.default_feed_url));
+
+        getFeedItemsAsync(mFeedURL);
     }
 
     @Override
@@ -190,7 +196,7 @@ public class ItemListFragment extends ListFragment {
                 } else {
                     try {
                         mFeedItemList = RssReader.read(result).getRssItems();
-                        setListAdapter(new RSSItemAdapter(getActivity(),R.layout.feed_item_layout,mFeedItemList));
+                        setListAdapter(new RSSItemAdapter(getActivity(), R.layout.feed_item_layout, mFeedItemList));
                     } catch (IOException feedException) {
                         Log.e(TAG, feedException.getMessage());
                     } catch (SAXException parseException) {
