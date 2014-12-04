@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/RSSReaderTheme" >
         <activity
-            android:name="me.robertoestrada.rssreader.ItemListActivity"
+            android:name=".activities.ItemListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,20 +19,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="me.robertoestrada.rssreader.ItemDetailActivity"
+            android:name=".activities.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName="me.robertoestrada.rssreader.ItemListActivity" >
+            android:parentActivityName=".activities.ItemListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ItemListActivity" />
+                android:value=".activities.ItemListActivity" />
         </activity>
         <activity
-            android:name="me.robertoestrada.rssreader.SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="me.robertoestrada.rssreader.ItemListActivity" >
+            android:parentActivityName=".activities.ItemListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="me.robertoestrada.rssreader.ItemListActivity" />
+                android:value=".activities.ItemListActivity" />
         </activity>
     </application>
 

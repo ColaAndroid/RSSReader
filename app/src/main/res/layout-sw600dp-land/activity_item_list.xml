@@ -36,7 +36,7 @@
 
         <fragment
             android:id="@+id/item_list"
-            android:name="me.robertoestrada.rssreader.ItemListFragment"
+            android:name="me.robertoestrada.rssreader.fragments.ItemListFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

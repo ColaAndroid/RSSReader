@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader;
+package me.robertoestrada.rssreader.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -30,10 +30,12 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import me.robertoestrada.rssreader.R;
+
 /**
  * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link ItemListActivity}
- * in two-pane mode (on tablets) or a {@link ItemDetailActivity}
+ * This fragment is either contained in a {@link me.robertoestrada.rssreader.activities.ItemListActivity}
+ * in two-pane mode (on tablets) or a {@link me.robertoestrada.rssreader.activities.ItemDetailActivity}
  * on handsets.
  */
 public class ItemDetailFragment extends Fragment {

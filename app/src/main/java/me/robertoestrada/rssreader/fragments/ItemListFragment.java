@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader;
+package me.robertoestrada.rssreader.fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import me.robertoestrada.rssreader.R;
 import me.robertoestrada.rssreader.adapters.RSSItemAdapter;
 import nl.matshofman.saxrssreader.RssItem;
 import nl.matshofman.saxrssreader.RssReader;

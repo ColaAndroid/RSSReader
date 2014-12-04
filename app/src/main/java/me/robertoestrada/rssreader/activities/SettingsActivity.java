@@ -14,12 +14,13 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader;
+package me.robertoestrada.rssreader.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import me.robertoestrada.rssreader.dummy.SettingsFragment;
+import me.robertoestrada.rssreader.R;
+import me.robertoestrada.rssreader.fragments.SettingsFragment;
 
 /**
  * This activity holds a PreferenceFragment

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader.dummy;
+package me.robertoestrada.rssreader.fragments;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

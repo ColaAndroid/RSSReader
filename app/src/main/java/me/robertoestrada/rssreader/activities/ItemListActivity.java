@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader;
+package me.robertoestrada.rssreader.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +23,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import me.robertoestrada.rssreader.fragments.ItemDetailFragment;
+import me.robertoestrada.rssreader.fragments.ItemListFragment;
+import me.robertoestrada.rssreader.R;
 
 /**
  * An activity representing a list of Items. This activity
@@ -33,11 +37,11 @@ import android.view.MenuItem;
  * item details side-by-side using two vertical panes.
  * <p/>
  * The activity makes heavy use of fragments. The list of items is a
- * {@link ItemListFragment} and the item details
- * (if present) is a {@link ItemDetailFragment}.
+ * {@link me.robertoestrada.rssreader.fragments.ItemListFragment} and the item details
+ * (if present) is a {@link me.robertoestrada.rssreader.fragments.ItemDetailFragment}.
  * <p/>
  * This activity also implements the required
- * {@link ItemListFragment.Callbacks} interface
+ * {@link me.robertoestrada.rssreader.fragments.ItemListFragment.Callbacks} interface
  * to listen for item selections.
  */
 public class ItemListActivity extends ActionBarActivity

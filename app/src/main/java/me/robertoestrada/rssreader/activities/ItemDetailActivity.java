@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package me.robertoestrada.rssreader;
+package me.robertoestrada.rssreader.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import me.robertoestrada.rssreader.fragments.ItemDetailFragment;
+import me.robertoestrada.rssreader.R;
 
 
 /**
@@ -31,7 +34,7 @@ import android.view.MenuItem;
  * in a {@link ItemListActivity}.
  * <p/>
  * This activity is mostly just a 'shell' activity containing nothing
- * more than a {@link ItemDetailFragment}.
+ * more than a {@link me.robertoestrada.rssreader.fragments.ItemDetailFragment}.
  */
 public class ItemDetailActivity extends ActionBarActivity {
 
