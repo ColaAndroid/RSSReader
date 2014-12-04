@@ -29,11 +29,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.TextView;
-
-
-import me.robertoestrada.rssreader.dummy.DummyContent;
-import nl.matshofman.saxrssreader.RssItem;
 
 /**
  * A fragment representing a single Item detail screen.
